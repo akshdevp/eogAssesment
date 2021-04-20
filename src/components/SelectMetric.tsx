@@ -8,11 +8,42 @@ import { actions, availableMetricsSelector } from './../Features/Measurement/red
 const getMetricsQuery = `query { getMetrics }`;
 
 export default function SelectMetric() {
- 
+  const dispatch = useDispatch();
+  const metrics = useSelector(availableMetricsSelector);
+
+  const [result] = useQuery({
+    query: getMetricsQuery,
+  });
+
+  const { data, error } = result;
+
+  useEffect(() => {
+    if (error) {
+      dispatch(actions.measurementApiErrorReceived({ error: error.message }));
+      return;
+    }
+
+    if (!data) return;
+    dispatch(actions.setAvailableMetrics(data.getMetrics));
+  }, [dispatch, data, error]);
+
+  const handleOnchange = (_event: React.FormEvent<HTMLInputElement>, value: string[]) => {
+    const selectedMetrics = value.map(val => {
+      return {
+        metricName: val,
+      };
+    });
+    dispatch(actions.setSelectedMetrics(selectedMetrics));
+  };
 
   return (
-    <div>
-      menu bar goes here
-    </div>
+    <Autocomplete
+      multiple
+      id="autocomplete-metrics"
+      options={metrics}
+      getOptionLabel={option => option}
+      renderInput={params => <TextField {...params} variant="standard" style={{width:450, marginLeft:500,border:"1px solid" , marginTop:30}} label="Choose a metrics" />}
+      onChange={(e: any, value: string[]) => handleOnchange(e, value)}
+    />
   );
 }
