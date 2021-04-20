@@ -31,7 +31,7 @@ const CurrentMeasurementCard = ({ measurement }: CardProps) => {
   const classes = useStyles();
 
   return (
-    <div>Card displays here</div>
+    <div> card displays here</div>
   );
 };
 

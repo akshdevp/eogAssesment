@@ -51,9 +51,45 @@ const Graph = () => {
 
   return (
     
-    <div>
-      <p>graph goes here</p>
+     <div>
+      {measurementsData.length ? (
+        <div>
+          <ResponsiveContainer width="100%" height={500}>
+            <LineChart
+              data={measurementsData}
+              margin={{
+                top: 5,
+                right: 20,
+                left: 0,
+                bottom: 5,
+              }}
+            >
+              <CartesianGrid />
+              <XAxis dataKey="name" interval="preserveStartEnd" minTickGap={200} tickFormatter={formatter} />
+              <YAxis />
+              <Tooltip labelFormatter={labelFormatter} />
+              {selectedMetrics.map((metric, i) => {
+                return (
+                  <Line
+                    type="monotone"
+                    isAnimationActive={false}
+                    dot={false}
+                    dataKey={metric.metricName}
+                    stroke={getColor(metric.metricName)}
+                    key={i}
+                  />
+                );
+              })}
+            </LineChart>
+          </ResponsiveContainer>
+        </div>
+      ) : (
+        <div>
+          <p>Please select</p>
+        </div>
+      )}
     </div>
+    
   );
 };
 
