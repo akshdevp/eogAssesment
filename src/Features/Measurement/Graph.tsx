@@ -71,7 +71,7 @@ const Graph = () => {
               {selectedMetrics.map((metric, i) => {
                 return (
                   <Line
-                    type="monotoneX"
+                    type="monotone"
                     isAnimationActive={false}
                     dot={false}
                     dataKey={metric.metricName}
@@ -85,7 +85,7 @@ const Graph = () => {
         </div>
       ) : (
         <div>
-          <p style={{marginLeft : 550}}>Please select the metrics to display graph</p>
+          <p style={{marginLeft:550}}>Please select the metrics to display graph</p>
         </div>
       )}
     </div>
