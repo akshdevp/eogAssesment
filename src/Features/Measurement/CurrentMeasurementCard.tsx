@@ -31,7 +31,16 @@ const CurrentMeasurementCard = ({ measurement }: CardProps) => {
   const classes = useStyles();
 
   return (
-    <div> card displays here</div>
+    <Card className={classes.root}>
+      <CardContent>
+        <Typography className={classes.title} color="textSecondary" gutterBottom>
+          {measurement.name}
+        </Typography>
+        <Typography component="h4" className={classes.textValue}>
+          {measurement.value}
+        </Typography>
+      </CardContent>
+    </Card>
   );
 };
 

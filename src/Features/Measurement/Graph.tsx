@@ -65,13 +65,13 @@ const Graph = () => {
               }}
             >
               <CartesianGrid />
-              <XAxis dataKey="name" interval="preserveStartEnd" minTickGap={200} tickFormatter={formatter} />
+              <XAxis dataKey="name" interval="preserveStartEnd" minTickGap={100} tickFormatter={formatter} />
               <YAxis />
               <Tooltip labelFormatter={labelFormatter} />
               {selectedMetrics.map((metric, i) => {
                 return (
                   <Line
-                    type="monotone"
+                    type="monotoneX"
                     isAnimationActive={false}
                     dot={false}
                     dataKey={metric.metricName}
@@ -85,7 +85,7 @@ const Graph = () => {
         </div>
       ) : (
         <div>
-          <p>Please select</p>
+          <p style={{marginLeft : 550}}>Please select the metrics to display graph</p>
         </div>
       )}
     </div>
